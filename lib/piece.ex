@@ -12,5 +12,4 @@ defmodule ChessEngine.Piece do
             w_rook: 10,
             w_queen: 11,
             king: 12
-
 end
