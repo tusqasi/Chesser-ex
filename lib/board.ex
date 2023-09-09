@@ -69,13 +69,15 @@ end
 
 defimpl Inspect, for: ChessEngine.Board do
   def inspect(%ChessEngine.Board{board: board}, _opts) do
-    board
+    ("%ChessEngine.Board{ board: [\n" <>(
+       board
     |> Enum.map(fn
-      :empty -> "0 "
-      x -> x <> " "
+      :empty -> ":empty,"
+      x -> x <> ",     "
     end)
     |> Enum.chunk_every(8)
-    |> Enum.map(&List.to_string/1)
-    |> Enum.join("\n")
+    |> Enum.map(fn x-> "\t"<> List.to_string(x) end)
+    |> Enum.join("\n") )<>
+          "\n]}")
   end
 end

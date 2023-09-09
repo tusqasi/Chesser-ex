@@ -4,16 +4,27 @@ defmodule ChessEngine do
   """
 
   @doc """
-  Makes a board from a pgn_str
+  Makes a standard chess game starting position
 
-  / => End of a file
-  number => Empty places
-  notation => Piece 
+    iex> ChessEngine.init_standard_board()
   """
   def init_standard_board do
     board_from_pgn("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR")
   end
 
+  @doc """
+  Makes a board from a pgn_str
+
+  / => End of a file
+  number => Empty places
+  notation => Piece 
+
+  ## Examples
+
+    iex> ChessEngine.board_from_pgn("")
+    %ChessEngine.Board{ board: [ :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty, :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty, :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty, :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty, :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty, :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty, :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty, :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty ]}
+
+  """
   def board_from_pgn("") do
     %ChessEngine.Board{}
   end

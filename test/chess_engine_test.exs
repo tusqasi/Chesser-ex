@@ -73,4 +73,7 @@ defmodule ChessEngineTest do
         ]
       }
   end
+  test "Empty PGN string" do
+    assert ChessEngine.board_from_pgn("")  == %ChessEngine.Board{}
+  end
 end
