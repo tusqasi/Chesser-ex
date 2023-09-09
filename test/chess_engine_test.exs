@@ -3,9 +3,7 @@ defmodule ChessEngineTest do
   doctest ChessEngine
 
   test "Generate a standard board" do
-    assert
-
-    ChessEngine.init_standard_board() ==
+    assert ChessEngine.init_standard_board() ==
       %ChessEngine.Board{
         board: [
           "r",
