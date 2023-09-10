@@ -3,9 +3,9 @@
 ## TODO
 - [x] Make a board from PGN
 - [ ] Check valid moves for a given piece
-    - [ ] Rook
+    - [x] Rook
     - [ ] Pawn
-    - [ ] Bishop
+    - [x] Bishop
     - [ ] Knight
     - [ ] King
     - [ ] Queen

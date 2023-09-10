@@ -78,14 +78,36 @@ defmodule ChessEngineTest do
     assert ChessEngine.board_from_pgn("") == %ChessEngine.Board{}
   end
 
-  test "Rook north-ward move validation" do
+  test "Pawn move validation" do
     m = 56
 
     ChessEngine.valid_moves(m, %ChessEngine.Board{
       board:
         ChessEngine.board_from_pgn("").board
-        |> List.replace_at(m, "r")
+        |> List.replace_at(m, "P")
     })
-    |> IO.inspect()
+    |> IO.inspect(charlists: :as_list)
+  end
+
+  test "Rook move validation" do
+    m = 56
+
+    ChessEngine.valid_moves(m, %ChessEngine.Board{
+      board:
+        ChessEngine.board_from_pgn("").board
+        |> List.replace_at(m, "R")
+    })
+    |> IO.inspect(charlists: :as_list)
+  end
+
+  test "Bishop move validation" do
+    m = 17
+
+    ChessEngine.valid_moves(m, %ChessEngine.Board{
+      board:
+        ChessEngine.board_from_pgn("").board
+        |> List.replace_at(m, "B")
+    })
+    |> IO.inspect(charlists: :as_list)
   end
 end

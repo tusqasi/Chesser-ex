@@ -13,11 +13,94 @@ defmodule ChessEngine do
     valid_moves(idx, piece, board)
   end
 
-  def valid_moves(idx, "r", board) do
+  def valid_moves(idx, "B", board) do
+    bishop_ne([], div(idx, 8) - 1, rem(idx, 8) + 1, board) ++
+      bishop_se([], div(idx, 8) + 1, rem(idx, 8) + 1, board) ++
+      bishop_sw([], div(idx, 8) + 1, rem(idx, 8) - 1, board) ++
+      bishop_nw([], div(idx, 8) - 1, rem(idx, 8) - 1, board)
+  end
+
+  def valid_moves(idx, "P", _board) do
+    if(div(idx, 8) == 7) do
+      [idx - 8, idx - 8 * 2]
+    else
+      [idx - 8]
+    end
+  end
+
+  def valid_moves(idx, "R", board) do
     rook_n([], idx, board) ++
       rook_w(idx, board) ++
       rook_e(idx, board) ++
       rook_s([], idx, board)
+  end
+
+  def bishop_sw(possible_moves, rank, file, _board)
+      when rank > 7 or file > 7 or rank < 0 or file < 0 do
+    possible_moves
+  end
+
+  def bishop_sw(possible_moves, rank, file, _board)
+      when rank == 0 or
+             file == 0 or
+             rank == 7 or
+             file == 7 do
+    possible_moves ++ [rank * 8 + file]
+  end
+
+  def bishop_sw(possible_moves, rank, file, board) do
+    bishop_sw(possible_moves ++ [rank * 8 + file], rank + 1, file - 1, board)
+  end
+
+  def bishop_se(possible_moves, rank, file, _board)
+      when rank > 7 or file > 7 or rank < 0 or file < 0 do
+    possible_moves
+  end
+
+  def bishop_se(possible_moves, rank, file, _board)
+      when rank == 0 or
+             file == 0 or
+             rank == 7 or
+             file == 7 do
+    possible_moves ++ [rank * 8 + file]
+  end
+
+  def bishop_se(possible_moves, rank, file, board) do
+    bishop_se(possible_moves ++ [rank * 8 + file], rank + 1, file + 1, board)
+  end
+
+  def bishop_nw(possible_moves, rank, file, _board)
+      when rank > 7 or file > 7 or rank < 0 or file < 0 do
+    possible_moves
+  end
+
+  def bishop_nw(possible_moves, rank, file, _board)
+      when rank == 0 or
+             file == 0 or
+             rank == 7 or
+             file == 7 do
+    possible_moves ++ [rank * 8 + file]
+  end
+
+  def bishop_nw(possible_moves, rank, file, board) do
+    bishop_nw(possible_moves ++ [rank * 8 + file], rank - 1, file - 1, board)
+  end
+
+  def bishop_ne(possible_moves, rank, file, _board)
+      when rank > 7 or file > 7 or rank < 0 or file < 0 do
+    possible_moves
+  end
+
+  def bishop_ne(possible_moves, rank, file, _board)
+      when rank == 0 or
+             file == 0 or
+             rank == 7 or
+             file == 7 do
+    possible_moves ++ [rank * 8 + file]
+  end
+
+  def bishop_ne(possible_moves, rank, file, board) do
+    bishop_ne(possible_moves ++ [rank * 8 + file], rank - 1, file + 1, board)
   end
 
   def rook_w(idx, _board) do
