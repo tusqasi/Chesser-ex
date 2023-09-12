@@ -2,14 +2,14 @@ defmodule ChessEngine.Validation do
   @doc """
   Returns a list of positions where the given piece can move
   """
-  def valid_moves(idx, board)
+  def possible_moves(idx, board)
       when is_integer(idx) and
              is_struct(board, ChessEngine.Board) do
     piece = Enum.at(board.board, idx)
-    valid_moves(idx, piece, board)
+    possible_moves(idx, piece, board)
   end
 
-  def valid_moves(idx, "Q", board) do
+  def possible_moves(idx, "Q", board) do
     rook_n([], idx, board) ++
       rook_w(idx, board) ++
       rook_e(idx, board) ++
@@ -20,18 +20,18 @@ defmodule ChessEngine.Validation do
       bishop_nw([], div(idx, 8) - 1, rem(idx, 8) - 1, board)
   end
 
-  def valid_moves(idx, "N", board) do
+  def possible_moves(idx, "N", board) do
     knight(idx, board)
   end
 
-  def valid_moves(idx, "B", board) do
+  def possible_moves(idx, "B", board) do
     bishop_ne([], div(idx, 8) - 1, rem(idx, 8) + 1, board) ++
       bishop_nw([], div(idx, 8) - 1, rem(idx, 8) - 1, board) ++
       bishop_sw([], div(idx, 8) + 1, rem(idx, 8) - 1, board) ++
       bishop_se([], div(idx, 8) + 1, rem(idx, 8) + 1, board)
   end
 
-  def valid_moves(idx, "P", _board) do
+  def possible_moves(idx, "P", _board) do
     if(div(idx, 8) == 7) do
       [idx - 8, idx - 8 * 2]
     else
@@ -39,7 +39,7 @@ defmodule ChessEngine.Validation do
     end
   end
 
-  def valid_moves(idx, "R", board) do
+  def possible_moves(idx, "R", board) do
     rook_n([], idx, board) ++
       rook_w(idx, board) ++
       rook_e(idx, board) ++

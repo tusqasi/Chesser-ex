@@ -81,7 +81,7 @@ defmodule ChessEngineTest do
   test "Pawn move validation" do
     m = 48
 
-    assert ChessEngine.Validation.valid_moves(m, %ChessEngine.Board{
+    assert ChessEngine.Validation.possible_moves(m, %ChessEngine.Board{
              board:
                ChessEngine.board_from_pgn("").board
                |> List.replace_at(m, "P")
@@ -89,7 +89,7 @@ defmodule ChessEngineTest do
 
     m = 32
 
-    assert ChessEngine.Validation.valid_moves(m, %ChessEngine.Board{
+    assert ChessEngine.Validation.possible_moves(m, %ChessEngine.Board{
              board:
                ChessEngine.board_from_pgn("").board
                |> List.replace_at(m, "P")
@@ -99,7 +99,7 @@ defmodule ChessEngineTest do
   test "Rook move validation" do
     m = 0
 
-    assert ChessEngine.Validation.valid_moves(m, %ChessEngine.Board{
+    assert ChessEngine.Validation.possible_moves(m, %ChessEngine.Board{
              board:
                ChessEngine.board_from_pgn("").board
                |> List.replace_at(m, "R")
@@ -107,7 +107,7 @@ defmodule ChessEngineTest do
 
     m = 7
 
-    assert ChessEngine.Validation.valid_moves(m, %ChessEngine.Board{
+    assert ChessEngine.Validation.possible_moves(m, %ChessEngine.Board{
              board:
                ChessEngine.board_from_pgn("").board
                |> List.replace_at(m, "R")
@@ -115,7 +115,7 @@ defmodule ChessEngineTest do
 
     m = 56
 
-    assert ChessEngine.Validation.valid_moves(m, %ChessEngine.Board{
+    assert ChessEngine.Validation.possible_moves(m, %ChessEngine.Board{
              board:
                ChessEngine.board_from_pgn("").board
                |> List.replace_at(m, "R")
@@ -125,7 +125,7 @@ defmodule ChessEngineTest do
   test "Bishop move validation" do
     m = 0
 
-    assert ChessEngine.Validation.valid_moves(m, %ChessEngine.Board{
+    assert ChessEngine.Validation.possible_moves(m, %ChessEngine.Board{
              board:
                ChessEngine.board_from_pgn("").board
                |> List.replace_at(m, "B")
@@ -133,7 +133,7 @@ defmodule ChessEngineTest do
 
     m = 7
 
-    assert ChessEngine.Validation.valid_moves(m, %ChessEngine.Board{
+    assert ChessEngine.Validation.possible_moves(m, %ChessEngine.Board{
              board:
                ChessEngine.board_from_pgn("").board
                |> List.replace_at(m, "B")
@@ -141,7 +141,7 @@ defmodule ChessEngineTest do
 
     m = 56
 
-    assert ChessEngine.Validation.valid_moves(m, %ChessEngine.Board{
+    assert ChessEngine.Validation.possible_moves(m, %ChessEngine.Board{
              board:
                ChessEngine.board_from_pgn("").board
                |> List.replace_at(m, "B")
@@ -149,7 +149,7 @@ defmodule ChessEngineTest do
 
     m = 34
 
-    assert ChessEngine.Validation.valid_moves(m, %ChessEngine.Board{
+    assert ChessEngine.Validation.possible_moves(m, %ChessEngine.Board{
              board:
                ChessEngine.board_from_pgn("").board
                |> List.replace_at(m, "B")
@@ -159,7 +159,7 @@ defmodule ChessEngineTest do
   test "Queen move validation" do
     m = 56
 
-    ChessEngine.Validation.valid_moves(m, %ChessEngine.Board{
+    ChessEngine.Validation.possible_moves(m, %ChessEngine.Board{
       board:
         ChessEngine.board_from_pgn("").board
         |> List.replace_at(m, "Q")

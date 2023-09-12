@@ -6,9 +6,9 @@
     - [x] Rook
     - [ ] Pawn
     - [x] Bishop
-    - [ ] Knight
+    - [x] Knight
     - [ ] King
-    - [ ] Queen
+    - [x] Queen
 
 
 ## How will the Engine work?
