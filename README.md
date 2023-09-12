@@ -5,6 +5,8 @@
 - [ ] Check valid moves for a given piece
     - [x] Rook
     - [ ] Pawn
+        - Pawn can move two place for its first move
+        - How to know if it was moved or not?
     - [x] Bishop
     - [x] Knight
     - [x] King
