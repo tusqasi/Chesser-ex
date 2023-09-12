@@ -27,5 +27,5 @@ out   => next_move
 ```bash
 mix test
 mix run -e "IO.inspect ChessEngine.init_standard_board"
-mix run -e "IO.inspect ChessEngine.board_from_pgn(\"ppprprpPRPRP\")"                                                     1.15.5-otp-24
+mix run -e "IO.inspect ChessEngine.board_from_pgn(\"ppprprpPRPRP\")"
 ```
