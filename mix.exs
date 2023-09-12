@@ -12,6 +12,8 @@ defmodule ChessEngine.MixProject do
       source_url: "https://github.com/tusqasi/chesser-ex",
       docs: [
           main: "readme", # The main page in the docs
+          output: "docs",
+          formatter: "html",
           extras: ["README.md"]
         ]
     ]
