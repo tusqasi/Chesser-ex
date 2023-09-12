@@ -166,4 +166,30 @@ defmodule ChessEngineTest do
     })
     |> IO.inspect(charlists: :as_list)
   end
+
+  test "King move validation" do
+    assert ChessEngine.Validation.possible_moves(0, %ChessEngine.Board{
+             board:
+               ChessEngine.board_from_pgn("").board
+               |> List.replace_at(0, "K")
+           }) == [1, 8, 9]
+
+    assert ChessEngine.Validation.possible_moves(7, %ChessEngine.Board{
+             board:
+               ChessEngine.board_from_pgn("").board
+               |> List.replace_at(7, "K")
+           }) == [6, 14, 15]
+
+    assert ChessEngine.Validation.possible_moves(1, %ChessEngine.Board{
+             board:
+               ChessEngine.board_from_pgn("").board
+               |> List.replace_at(1, "K")
+           }) == [0, 2, 8, 9, 10]
+
+    assert ChessEngine.Validation.possible_moves(56, %ChessEngine.Board{
+             board:
+               ChessEngine.board_from_pgn("").board
+               |> List.replace_at(56, "K")
+           }) == [48, 49, 57]
+  end
 end

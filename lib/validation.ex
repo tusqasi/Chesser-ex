@@ -1,12 +1,60 @@
 defmodule ChessEngine.Validation do
   @doc """
-  Returns a list of positions where the given piece can move
+  Returns a list of positions where the piece at the given index can move
   """
   def possible_moves(idx, board)
       when is_integer(idx) and
              is_struct(board, ChessEngine.Board) do
     piece = Enum.at(board.board, idx)
     possible_moves(idx, piece, board)
+  end
+
+  def possible_moves(idx, "K", _board) do
+    # rank = div(idx, 8)
+    file = rem(idx, 8)
+
+    ([] ++
+       if idx - 9 >= 0 and file != 0 do
+         [idx - 9]
+       else
+         []
+       end ++
+       if idx - 8 >= 0 do
+         [idx - 8]
+       else
+         []
+       end ++
+       if idx - 7 >= 0 and file != 7 do
+         [idx - 7]
+       else
+         []
+       end ++
+       if idx - 1 >= 0 and file != 0 do
+         [idx - 1]
+       else
+         []
+       end ++
+       if idx + 1 <= 63 and file != 7 do
+         [idx + 1]
+       else
+         []
+       end ++
+       if idx + 7 <= 63 and file != 0 do
+         [idx + 7]
+       else
+         []
+       end ++
+       if idx + 8 <= 63 do
+         [idx + 8]
+       else
+         []
+       end ++
+       if idx + 9 <= 63 and file != 7 do
+         [idx + 9]
+       else
+         []
+       end)
+    |> Enum.to_list()
   end
 
   def possible_moves(idx, "Q", board) do

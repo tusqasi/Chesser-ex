@@ -7,7 +7,7 @@
     - [ ] Pawn
     - [x] Bishop
     - [x] Knight
-    - [ ] King
+    - [x] King
     - [x] Queen
 
 
