@@ -14,37 +14,62 @@ defmodule ChessEngine do
 
   @doc """
   Makes a board from a pgn_str
+  <table>
+  <tr>
+    <td>
+     <code> / </code>
+    </td>
+    <td> End of a file </td>
+  </tr>
+  <tr>
+    <td>
+     <code> Integer </code>
+    </td>
+    <td> Empty places </td>
+  </tr>
 
-  / => End of a file
-  number => Empty places
-  notation => Piece 
+  <tr>
+    <td> Notation <code> [p,  r, k, n, q, b, P, R, K, N, Q, B] </code>
+    </td>
+    <td> Piece </td>
+  </tr>
+  </table>
 
   ## Examples
-
+    ```
     iex> ChessEngine.board_from_pgn("")
-    %ChessEngine.Board{ board: [ :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty, :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty, :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty, :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty, :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty, :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty, :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty, :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty ]}
-
+    %ChessEngine.Board{ board: [
+      :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty, 
+      :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty, 
+      :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty, 
+      :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty,
+      :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty,
+      :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty,
+      :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty,
+      :empty,:empty,:empty,:empty,:empty,:empty,:empty,:empty
+    ]}
+    ```
   """
-  def board_from_pgn("") do
-    %ChessEngine.Board{}
-  end
-
   def board_from_pgn(pgn_str)
-      when is_bitstring(pgn_str) do
+      when pgn_str != "" and is_bitstring(pgn_str) do
     first = String.first(pgn_str)
     rest = String.slice(pgn_str, 1..-1)
     board_from_pgn(first, rest, %ChessEngine.Board{}, 0)
   end
 
-  def board_from_pgn("/", "", board, _n) do
+  def board_from_pgn("") do
+    %ChessEngine.Board{}
+  end
+
+  defp board_from_pgn("/", "", board, _n) do
     board
   end
 
-  def board_from_pgn(_, _, board, n) when n > 63 do
+  defp board_from_pgn(_, _, board, n) when n > 63 do
     board
   end
 
-  def board_from_pgn("/", rest, board, n) do
+  defp board_from_pgn("/", rest, board, n) do
     board_from_pgn(
       String.first(rest),
       String.slice(rest, 1..-1),
@@ -57,7 +82,7 @@ defmodule ChessEngine do
     )
   end
 
-  def board_from_pgn(first, "", board, n) do
+  defp board_from_pgn(first, "", board, n) do
     %ChessEngine.Board{
       board:
         List.replace_at(
@@ -68,7 +93,7 @@ defmodule ChessEngine do
     }
   end
 
-  def board_from_pgn(first, rest, board, n) do
+  defp board_from_pgn(first, rest, board, n) do
     case(Integer.parse(first)) do
       {num, ""} ->
         board_from_pgn(String.first(rest), rest, board, n + num)
