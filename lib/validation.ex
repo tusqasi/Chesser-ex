@@ -80,7 +80,7 @@ defmodule ChessEngine.Validation do
   end
 
   def possible_moves(idx, "P", _board) do
-    if(div(idx, 8) == 7) do
+    if(div(idx, 8) == 6) do
       [idx - 8, idx - 8 * 2]
     else
       [idx - 8]

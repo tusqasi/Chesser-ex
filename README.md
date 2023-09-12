@@ -2,9 +2,9 @@
 
 ## TODO
 - [x] Make a board from PGN
-- [ ] Check valid moves for a given piece
+- [x] Check valid moves for a given piece
     - [x] Rook
-    - [ ] Pawn
+    - [x] Pawn
         - Pawn can move two place for its first move
         - How to know if it was moved or not?
     - [x] Bishop

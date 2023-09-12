@@ -78,6 +78,18 @@ defmodule ChessEngineTest do
     assert ChessEngine.board_from_pgn("") == %ChessEngine.Board{}
   end
 
+  test "PGN string" do
+    assert ChessEngine.board_from_pgn("/////") == %ChessEngine.Board{}
+
+    assert ChessEngine.board_from_pgn("r") == %ChessEngine.Board{
+             board: %ChessEngine.Board{}.board |> List.replace_at(0, "r")
+           }
+
+    assert ChessEngine.board_from_pgn("/r") == %ChessEngine.Board{
+             board: %ChessEngine.Board{}.board |> List.replace_at(0, "r")
+           }
+  end
+
   test "Pawn move validation" do
     m = 48
 
@@ -159,12 +171,19 @@ defmodule ChessEngineTest do
   test "Queen move validation" do
     m = 56
 
-    ChessEngine.Validation.possible_moves(m, %ChessEngine.Board{
-      board:
-        ChessEngine.board_from_pgn("").board
-        |> List.replace_at(m, "Q")
-    })
-    |> IO.inspect(charlists: :as_list)
+    assert ChessEngine.Validation.possible_moves(m, %ChessEngine.Board{
+             board:
+               ChessEngine.board_from_pgn("").board
+               |> List.replace_at(m, "Q")
+           }) == [48, 40, 32, 24, 16, 8, 0, 57, 58, 59, 60, 61, 62, 63, 49, 42, 35, 28, 21, 14, 7]
+
+    m = 0
+
+    assert ChessEngine.Validation.possible_moves(m, %ChessEngine.Board{
+             board:
+               ChessEngine.board_from_pgn("").board
+               |> List.replace_at(m, "Q")
+           }) == [1, 2, 3, 4, 5, 6, 7, 8, 16, 24, 32, 40, 48, 56, 9, 18, 27, 36, 45, 54, 63]
   end
 
   test "King move validation" do

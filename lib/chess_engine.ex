@@ -36,6 +36,27 @@ defmodule ChessEngine do
     board_from_pgn(first, rest, %ChessEngine.Board{}, 0)
   end
 
+  def board_from_pgn("/", "", board, _n) do
+    board
+  end
+
+  def board_from_pgn(_, _, board, n) when n > 63 do
+    board
+  end
+
+  def board_from_pgn("/", rest, board, n) do
+    board_from_pgn(
+      String.first(rest),
+      String.slice(rest, 1..-1),
+      board,
+      if rem(n, 8) == 0 do
+        n
+      else
+        8 - rem(n, 8) + n + 8
+      end
+    )
+  end
+
   def board_from_pgn(first, "", board, n) do
     %ChessEngine.Board{
       board:
@@ -45,19 +66,6 @@ defmodule ChessEngine do
           first
         )
     }
-  end
-
-  def board_from_pgn("/", rest, board, n) do
-    board_from_pgn(
-      String.first(rest),
-      String.slice(rest, 1..-1),
-      board,
-      if rem(n, 8) != 0 do
-        8 - rem(n, 8) + n
-      else
-        n
-      end
-    )
   end
 
   def board_from_pgn(first, rest, board, n) do
